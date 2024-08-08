@@ -16,22 +16,18 @@
                <h3 class="font-semibold text-xl text-gray-800 leading-tight"> 漫画ブログ </h3>
             </x-slot>
             
-            <!--<h1 class="font-bold text-2xl">漫画ブログ</h1>-->
             <div class='posts'>
                 <div class='post'>
-                    @foreach ($posts as $post)
-                        <div class="m-5">
-                            <a href="/posts/{{ $post->id }}">
-                                 <h2 class="text-xl font-bold">{{ $post->title }}</h2>
-                            </a>
-                            <p class='body'>{{ $post->body }}</p>
-                        </div>
-                    @endforeach
+                    <div class="m-5">
+                        <h2 class="text-xl font-bold">{{ $post->title }}</h2>
+                        <p class='body'>{{ $post->body }}</p>
+                    </div>
                 </div>
             </div>
-            <div class='paginate'>
-                {{ $posts->links() }}
-            </div>
+            
+            <div class="footer">
+            <a href="/">戻る</a>
+        </div>
             
         </x-app-layout>
         
