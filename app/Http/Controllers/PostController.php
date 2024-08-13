@@ -16,6 +16,9 @@ class PostController extends Controller
     
     public function show(Post $post)
     {
+        
+        // 投稿に関連するコメントをロード 
+        $post->load('comments');
         return view('posts.show')->with(['post' => $post]);
     }
     
@@ -51,4 +54,5 @@ class PostController extends Controller
         $post->delete();
         return redirect('/');
     }
+    
 }

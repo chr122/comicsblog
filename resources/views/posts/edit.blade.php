@@ -30,7 +30,7 @@
                     <textarea name="post[body]" placeholder="漫画の感想など">{{$post->body}}</textarea>
                     <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
                 </div>
-                <input type="submit" value="update"/>
+                <input type="submit" value="update">
                 
             </form>
             
