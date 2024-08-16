@@ -19,7 +19,10 @@ class PostController extends Controller
         
         // 投稿に関連するコメントをロード 
         $post->load('comments');
-        return view('posts.show')->with(['post' => $post]);
+        $user = Auth::user();
+        $isLike = $user->isLike($post->id);
+        
+        return view('posts.show')->with(['post' => $post, 'isLike'=>$isLike]);
     }
     
     public function create()

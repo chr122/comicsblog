@@ -25,6 +25,22 @@
                 </div>
             </div>
             
+            
+            @if($isLike)
+                <div>
+                  <button onclick="like({{$post->id}})">いいね解除</button>
+                </div>
+            @else
+                <form action="/like" method="POST">
+                   @csrf
+                    <div>
+                        <input type="hidden" name="postId" value="{{$post->id}}" />
+                        
+                    </div>
+                        <input type="submit" value="いいね" />
+                </form>
+            @endif
+            
             <form action="{{ route('comments.store') }}" method="POST">
                 @csrf
                 <div class='comments'>
@@ -37,13 +53,13 @@
                         </div>
                         <div class="review"> 
                             <label for="review">Review</label> 
-                            <input type="number" name="review" min="1" max="5" value="{{ old('review') }}">
+                            <input type="number" name="review" min="1" max="5" value="{{ old('review') }}" />
                             @error('review') 
                                 <p class="review_error" style="color:red">{{ $message }}</p>
                             @enderror 
                         </div>
-                        <input type="hidden" name="post_id" value="{{ $post->id }}">
-                        <input type="submit" value="comment">
+                        <input type="hidden" name="post_id" value="{{ $post->id }}" />
+                        <input type="submit" value="comment" />
                     </div>
                 </div>
             </form>

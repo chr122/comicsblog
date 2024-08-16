@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\LikeController;
 
 
 /*
@@ -32,6 +33,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/posts/{post}', [PostController::class,'delete']);
     Route::post('/posts/{comment_id}/comments','CommentsController@store');
     Route::post('/comments', [CommentsController::class, 'store'])->name('comments.store');
+    
+    Route::post('/like', [LikeController::class,'store']);
+    Route::post('/unlike/{postId}',[LikeController::class,'destroy']);
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
