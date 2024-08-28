@@ -19,24 +19,13 @@
             <!--<h1 class="font-bold text-2xl">漫画ブログ</h1>-->
             <div class='posts'>
                 <div class='post'>
+                    <h2 class='text-xl font-bold'>{{ $category->name }}</h2>
                     @foreach ($posts as $post)
                         <div class="m-5">
-                            <p class='text-xl font-extrabold leading-normal'>{{$post->user->name}}</p>
-                            <a href="/posts/{{ $post->id }}" class="text-lg font-medium">
-                                 <h2>{{ $post->title }}</h2>
+                            <a href="/posts/{{ $post->id }}">
+                                 <h2 class="text-lg font-semibold">{{ $post->title }}</h2>
                             </a>
                             <p class='body'>{{ $post->body }}</p>
-                            
-                        
-                            <a href="/categories/{{ $post->category->id }}" class='leading-10'>{{ $post->category->name }}</a>
-                            
-                            @if($post->user_id==Auth::id())
-                                <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button" onclick="deletePost({{ $post->id }})" class='text-red-500'>delete</button> 
-                                </form>
-                            @endif
                         </div>
                     @endforeach
                 </div>
@@ -52,8 +41,8 @@
                 }
             </script>
             
-            <div class='flex justfy-center [&_ul]:flex'>
-                {{ $posts->links('pagination::bootstrap-5') }}
+            <div class='paginate'>
+                {{ $posts->links() }}
             </div>
             
         </x-app-layout>
