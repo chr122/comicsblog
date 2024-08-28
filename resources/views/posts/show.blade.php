@@ -21,25 +21,31 @@
                     <div class="m-5">
                         <h2 class="text-xl font-bold">{{ $post->title }}</h2>
                         <p class='body'>{{ $post->body }}</p>
+                        <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
+                        @if($post->user_id==Auth::id())
+                            <div class="edit">
+                                <a href="/posts/{{$post->id}}/edit">edit</a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
+
             
             
-            @if($isLike)
-                <div>
-                  <button onclick="like({{$post->id}})">いいね解除</button>
-                </div>
-            @else
-                <form action="/like" method="POST">
-                   @csrf
-                    <div>
-                        <input type="hidden" name="postId" value="{{$post->id}}" />
-                        
-                    </div>
-                        <input type="submit" value="いいね" />
-                </form>
-            @endif
+            <div>
+              @if($post->is_liked_by_auth_user())
+                <a href="{{ route('post.unlike', ['id' => $post->id]) }}" class="btn btn-success btn-sm text-red-700">
+                    ♥
+                        <span class="badge">{{ $post->likes->count() }}</span>
+                </a>
+              @else
+                <a href="{{ route('post.like', ['id' => $post->id]) }}" class="btn btn-secondary btn-sm text-red-700">
+                    ♡
+                        <span class="badge">{{ $post->likes->count() }}</span>
+                </a>
+              @endif
+            </div>
             
             <form action="{{ route('comments.store') }}" method="POST">
                 @csrf
@@ -88,10 +94,6 @@
                         @endforeach
                     </ul>
                 @endif
-            </div>
-            
-            <div class="edit">
-                <a href="/posts/{{$post->id}}/edit">edit</a>
             </div>
             
             <div class="footer">

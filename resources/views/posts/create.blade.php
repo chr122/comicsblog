@@ -17,7 +17,7 @@
             </x-slot>
             
             <form action="/posts" method="POST">
-                <h1>漫画ブログ</h1>
+                <!--<h1>漫画ブログ</h1>-->
                 @csrf
                 <div class="title">
                 <h2>Title</h2>
@@ -29,7 +29,15 @@
                     <textarea name="post[body]" placeholder="漫画の感想など">{{ old('post.body') }}</textarea>
                     <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
                 </div>
-                <input type="submit" value="create"/>
+                <div class="category">
+                    <h2>Category</h2>
+                    <select name="post[category_id]">
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <input type="submit" value="create"/ class='text-sky-500'>
                 
             </form>
             

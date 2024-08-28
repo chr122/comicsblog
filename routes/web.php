@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\CategoryController;
 
 
 /*
@@ -25,17 +26,17 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [PostController::class, 'index'])->name('index');
-    Route::get('/posts/create', [PostController::class, 'create'])->name('create');
+    Route::get('/posts/create', [PostController::class, 'category'])->name('create');
     Route::get('/posts/{post}', [PostController::class ,'show']);
     Route::post('/posts', [PostController::class, 'store']);
     Route::get('/posts/{post}/edit', [PostController::class, 'edit']);
     Route::put('/posts/{post}', [PostController::class, 'update']);
     Route::delete('/posts/{post}', [PostController::class,'delete']);
-    Route::post('/posts/{comment_id}/comments','CommentsController@store');
+    // Route::post('/posts/{comment_id}/comments','CommentsController@store');
     Route::post('/comments', [CommentsController::class, 'store'])->name('comments.store');
-    
-    Route::post('/like', [LikeController::class,'store']);
-    Route::post('/unlike/{postId}',[LikeController::class,'destroy']);
+    Route::get('/like/{id}', [PostController::class, 'like'])->name('post.like');
+    Route::get('/unlike/{id}', [PostController::class, 'unlike'])->name('post.unlike');
+    Route::get('/categories/{category}', [CategoryController::class,'index']);
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
