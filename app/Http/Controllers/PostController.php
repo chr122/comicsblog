@@ -33,9 +33,9 @@ class PostController extends Controller
         return view('posts.show')->with(['post' => $post]);
     }
     
-    public function edit(Post $post)
+    public function edit(Post $post, Category $category)
     {
-        return view('posts.edit')->with(['post' => $post]);
+        return view('posts.edit')->with(['post' => $post, 'categories' => $category -> get()]);
     }
 
     public function store(Post $post, PostRequest $request)

@@ -30,6 +30,20 @@
                     <textarea name="post[body]" placeholder="漫画の感想など">{{$post->body}}</textarea>
                     <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
                 </div>
+                <div class="image">
+                    <input type="file" name="image" value="{{$post->image}}"/>
+                </div>
+                <div class="category">
+                    <h2>Category</h2>
+                    <select name="post[category_id]">
+                        <option value="{{ $post->category->id }}">{{ $post->category->name }}</option>
+                        @foreach($categories as $category)
+                        @if(!($category->id == $post->category->id))
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endif
+                        @endforeach
+                    </select>
+                </div>
                 <input type="submit" value="update">
                 
             </form>
