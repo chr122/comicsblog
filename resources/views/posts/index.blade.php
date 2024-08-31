@@ -17,7 +17,7 @@
             </x-slot>
             
             <div>
-              <form action="{{ route('post.search') }}" method="GET">
+              <form action="{{ route('post.search') }}" method="GET" class='pl-5 pt-5'>
             
               @csrf
             

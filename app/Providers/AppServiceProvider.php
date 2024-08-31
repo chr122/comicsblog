@@ -24,5 +24,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app['request']->server->set('HTTPS','on');
         
         // Paginator::useBootstrap();
+        // Paginator::defaultView('simple-default');
+
+        // Paginator::defaultSimpleView('simple-default');
     }
 }
