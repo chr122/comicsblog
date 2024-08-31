@@ -66,6 +66,11 @@
                 }
             </script>
             
+            <div class='flex justify-center  [&_ul]:flex'>
+                <div class='text-center space-x-4 flex justify-between'>
+                    {{ $posts->links() }}
+                </div>
+            </div>
             
         </x-app-layout>
         
