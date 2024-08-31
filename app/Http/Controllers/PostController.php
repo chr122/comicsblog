@@ -8,12 +8,21 @@ use App\Http\Requests\PostRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use App\Models\Like;
+use Cloudinary;
 
 class PostController extends Controller
 {
-    public function index(Post $post)
+    public function index(Post $post, Request $request)
     {
-        return view('posts.index')->with(['posts' => $post->getPaginateByLimit(3)]);
+        
+        $post = post::query();
+        /* キーワードから検索処理 */
+        $keyword = $request->input('keyword');
+        if(!empty($keyword)) {//$keyword　が空ではない場合、検索処理を実行します
+            $post->where('title', 'LIKE', "%{$keyword}%")
+            ->orwhere('body', 'LIKE', "%{$keyword}%" )->get();
+        }
+        return view('posts.index')->with(['posts' => $post->orderBy('updated_at', 'DESC')->paginate(3)]);
     }
     
     public function show(Post $post)
@@ -32,6 +41,10 @@ class PostController extends Controller
     public function store(Post $post, PostRequest $request)
     {
         $input = $request['post'];
+        if($request->file('image')){ //画像ファイルが送られた時だけ処理が実行される
+            $image_url = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+            $input += ['image' => $image_url];
+        }
         $id = Auth::id();
         $post->user_id = $id;
         $post->fill($input)->save();
