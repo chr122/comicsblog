@@ -21,6 +21,9 @@
                     <div class="m-5">
                         <h2 class="text-xl font-bold">{{ $post->title }}</h2>
                         <p class='body'>{{ $post->body }}</p>
+                        <div>
+                            <img src="{{ $post->image }}" alt="画像が読み込めません。">
+                        </div>
                         <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
                         @if($post->user_id==Auth::id())
                             <div class="edit">

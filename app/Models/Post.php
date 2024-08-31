@@ -16,7 +16,9 @@ class Post extends Model
     protected $fillable = [
         'title',
         'body',
-        'category_id'
+        'image',
+        'category_id',
+        'user_id'
     ];
     
     public function getPaginateByLimit(int $limit_count = 5)

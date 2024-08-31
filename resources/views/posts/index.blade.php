@@ -1,20 +1,30 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <title>漫画ブログ</title>
+<!--<!DOCTYPE html>-->
+<!--<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">-->
+<!--    <head>-->
+<!--        <meta charset="utf-8">-->
+<!--        <title>漫画ブログ</title>-->
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+<!--        <link rel="preconnect" href="https://fonts.bunny.net">-->
+<!--        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />-->
         
-    </head>
-    <body class="antialiased">
+<!--    </head>-->
+<!--    <body class="antialiased">-->
         
         <x-app-layout>
             <x-slot name="header">
                <h3 class="font-semibold text-xl text-gray-800 leading-tight"> 漫画ブログ </h3>
             </x-slot>
+            
+            <div>
+              <form action="{{ route('post.search') }}" method="GET">
+            
+              @csrf
+            
+                <input type="text" name="keyword" placeholder="キーワードを入力">
+                <input type="submit" value="検索">
+              </form>
+            </div>
             
             <!--<h1 class="font-bold text-2xl">漫画ブログ</h1>-->
             <div class='posts'>
@@ -40,6 +50,10 @@
                         </div>
                     @endforeach
                 </div>
+                <div class=''>
+                    {{--{{ $posts->links('pagination::bootstrap-5') }}--}}
+                    {{ $posts->links() }}
+                </div>
             </div>
             
             <script>
@@ -60,5 +74,5 @@
             
         </x-app-layout>
         
-    </body>
-</html>
+<!--    </body>-->
+<!--</html>-->

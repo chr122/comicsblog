@@ -16,7 +16,7 @@
                <h3 class="font-semibold text-xl text-gray-800 leading-tight"> 漫画ブログ </h3>
             </x-slot>
             
-            <form action="/posts" method="POST">
+            <form action="/posts" method="POST" enctype="multipart/form-data">
                 <!--<h1>漫画ブログ</h1>-->
                 @csrf
                 <div class="title">
@@ -28,6 +28,9 @@
                     <h2>Comment</h2>
                     <textarea name="post[body]" placeholder="漫画の感想など">{{ old('post.body') }}</textarea>
                     <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
+                </div>
+                <div class="image">
+                    <input type="file" name="image">
                 </div>
                 <div class="category">
                     <h2>Category</h2>

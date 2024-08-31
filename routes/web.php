@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/like/{id}', [PostController::class, 'like'])->name('post.like');
     Route::get('/unlike/{id}', [PostController::class, 'unlike'])->name('post.unlike');
     Route::get('/categories/{category}', [CategoryController::class,'index']);
+    Route::get('/search', [PostController::class, 'index'])->name('post.search');
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
