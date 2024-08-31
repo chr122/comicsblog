@@ -50,10 +50,7 @@
                         </div>
                     @endforeach
                 </div>
-                <div class=''>
-                    {{--{{ $posts->links('pagination::bootstrap-5') }}--}}
-                    {{ $posts->links() }}
-                </div>
+                
             </div>
             
             <script>
@@ -66,7 +63,7 @@
                 }
             </script>
             
-            <div class='flex justify-center  [&_ul]:flex'>
+            <div class='flex justify-center [&_ul]:flex'>
                 <div class='text-center space-x-4 flex justify-between'>
                     {{ $posts->links() }}
                 </div>
