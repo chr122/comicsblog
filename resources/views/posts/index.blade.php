@@ -17,7 +17,7 @@
             </x-slot>
             
             <div>
-              <form action="{{ route('post.search') }}" method="GET" class='pl-5 pt-5'>
+              <form action="{{ route('post.search') }}" method="GET" class='pl-5 pt-5 font-medium'>
             
               @csrf
             
@@ -37,16 +37,7 @@
                             </a>
                             <p class='body'>{{ $post->body }}</p>
                             
-                        
                             <a href="/categories/{{ $post->category->id }}" class='leading-10'>{{ $post->category->name }}</a>
-                            
-                            @if($post->user_id==Auth::id())
-                                <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button" onclick="deletePost({{ $post->id }})" class='text-red-500'>delete</button> 
-                                </form>
-                            @endif
                         </div>
                     @endforeach
                 </div>

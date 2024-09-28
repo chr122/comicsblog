@@ -19,18 +19,25 @@
             <div class='posts'>
                 <div class='post'>
                     <div class="m-5">
-                        <h2 class="text-xl font-bold">{{ $post->title }}</h2>
-                        <p class='body'>{{ $post->body }}</p>
-                        <div>
+                        <h2 class="text-xl font-bold pl-5 pt-5">{{ $post->title }}</h2>
+                        <p class='body pl-5 pt-5'>{{ $post->body }}</p>
+                        <div class='pl-5 pt-5'>
                             <img src="{{ $post->image }}" alt="画像が読み込めません。">
                         </div>
-                        <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
-                        @if($post->user_id==Auth::id())
-                            <div class="edit">
+                        <a href="/categories/{{ $post->category->id }}" class='pl-5 pt-5'>Category ： {{ $post->category->name }}</a>
+                    </div>
+                    @if($post->user_id==Auth::id())
+                            <div class="edit pl-5 pt-5">
                                 <a href="/posts/{{$post->id}}/edit">edit</a>
                             </div>
-                        @endif
-                    </div>
+                    @endif
+                    @if($post->user_id==Auth::id())
+                                <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" onclick="deletePost({{ $post->id }})" class='text-red-500 pl-5 pt-5'>delete</button> 
+                                </form>
+                    @endif
                 </div>
             </div>
 
