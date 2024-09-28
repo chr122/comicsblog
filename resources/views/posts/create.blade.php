@@ -19,20 +19,21 @@
             <form action="/posts" method="POST" enctype="multipart/form-data">
                 <!--<h1>漫画ブログ</h1>-->
                 @csrf
-                <div class="title">
+                <div class='pl-5 pt-5 font-medium'>
                 <h2>Title</h2>
                     <input type="text" name="post[title]" placeholder="タイトル" value="{{ old('post.title') }}"/>
                     <p class="title__error" style="color:red">{{ $errors->first('post.title') }}</p>
                 </div>
-                <div class="body">
+                <div class='pl-5 pt-5 font-medium'>
                     <h2>Comment</h2>
                     <textarea name="post[body]" placeholder="漫画の感想など">{{ old('post.body') }}</textarea>
                     <p class="body__error" style="color:red">{{ $errors->first('post.body') }}</p>
                 </div>
-                <div class="image">
+                <div class='pl-5 pt-5 font-medium'>
+                    <h2>Image</h2>
                     <input type="file" name="image">
                 </div>
-                <div class="category">
+                <div class='pl-5 pt-5 font-medium'>
                     <h2>Category</h2>
                     <select name="post[category_id]">
                         @foreach($categories as $category)
@@ -40,12 +41,12 @@
                         @endforeach
                     </select>
                 </div>
-                <input type="submit" value="create"/ class='text-sky-500'>
+                <input type="submit" value="create"/ class='text-sky-500 pl-5 pt-5 font-medium'>
                 
             </form>
             
-            <div class="footer">
-            <a href="/">戻る</a>
+            <div class='pl-5 pt-5 pb-5 font-medium'>
+            <a href="/">← Homeに戻る</a>
         </div>
             
         </x-app-layout>
